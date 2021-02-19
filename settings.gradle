@@ -1,0 +1,2 @@
+include ':lecture1'
+rootProject.name = "AndroidCourse"

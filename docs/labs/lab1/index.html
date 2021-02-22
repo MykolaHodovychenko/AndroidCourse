@@ -1,0 +1,301 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Лабораторная работа 1</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id=""
+                  title="Лабораторная работа 1"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Вступление" duration="0">
+        <h2 is-upgraded><strong>Тема работы: Знакомство с Android Studio, создание простейшего приложения</strong></h2>
+<h2 is-upgraded><strong>Цель работы:</strong></h2>
+<ul>
+<li>ознакомиться с инструментами разработки Android-приложений; </li>
+<li>научиться запускать приложение на эмуляторе;</li>
+<li>ознакомиться с работой Activity и созданием макета;</li>
+<li>изучить вопрос доступа к объектам UI в классе Activity;</li>
+<li>научиться осуществлять простейшую обработку событий.</li>
+</ul>
+<aside class="special"><p><strong>Заметка:</strong> В качестве примера вы можете воспользоваться репозиторием или скачать архив с проектом</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><a href="https://opu.ua/" target="_blank"><paper-button class="colored" raised>Репозиторий с проектом</paper-button></a></p>
+</td><td colspan="1" rowspan="1"><p><a href="https://opu.ua/" target="_blank"><paper-button class="colored" raised>Скачать архив с проектом</paper-button></a></p>
+</td></tr>
+</table>
+</aside>
+<h2 is-upgraded><strong>Задание.</strong></h2>
+<p>Необходимо разработать простое приложение. Пользователь вводит свое имя, нажимает на кнопку и появляется приветственная надпись. При смене языка с английского на русский, приложение должно изменить язык надписей на русский.</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\fc426d389a0467c9.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\cf7c72f60c0fd561.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\2b61413874af8d36.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\8d5f22087d4888d0.png"></p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Установка программного обеспечения" duration="0">
+        <ol type="1" start="1">
+<li>Установите Java Development Kit - <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">https://www.oracle.com/java/technologies/javase-downloads.html</a></li>
+<li>Установите Android Studio по следующей ссылке - <a href="https://developer.android.com/studio" target="_blank">https://developer.android.com/studio</a></li>
+</ol>
+<p>При установке Android Studio выделите компонент <strong>Android Virtual Device</strong></p>
+<p class="image-container"><img style="width: 623.00px" src="img\e911d526c03700fc.png"></p>
+<ol type="1" start="3">
+<li>Убедитесь, что ваша операционная система и ваш процессор удовлетворяет требованиям для запуска эмулятора Android-устройства. При необходимости, установите дополнительное ПО. Подробности <a href="https://pnit.gitbook.io/android/lectures/lecture-1/setup#2-trebovaniya-k-processoru-i-operacionnoi-sisteme-dlya-emulyatora" target="_blank">здесь</a>.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Настройка Android Studio" duration="0">
+        <ol type="1" start="1">
+<li>При запуске Android Studio выберите пункт меню <strong>Configure</strong>, после чего выберите <strong>SDK Manager</strong></li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\d38d151ade772975.png"></p>
+<ol type="1" start="2">
+<li>Во вкладке <strong>SDK Platform</strong> убедитесь, что у вас загружены библиотеки для актуальной версии Android </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\ae77e92d5f3331b1.png"></p>
+<ol type="1" start="3">
+<li>Во вкладке SDK Tools убедитесь, что у вас загружены следующие инструменты SDK: <strong>Android SDK Build-Tools</strong>, <strong>Android Emulator</strong>, <strong>Android SDK Platform Tools</strong>, <strong>HAXM Installer</strong> для процессоров Intel или <strong>Hypervisor Driver for AMD</strong> для процессоров AMD, <strong>Layout Inspector for API 29-30</strong>. Если вы планируете тестировать приложение на физическом устройстве, установите также <strong>Google USB Driver</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\46a20abbb50fca71.png"></p>
+<ol type="1" start="4">
+<li>Нажмите <strong>OK</strong>, после чего Android Studio установит требуемые инструменты.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Создание нового проекта" duration="0">
+        <ol type="1" start="1">
+<li>В стартовом окне Android Studio выберите пункт <strong>Create New Project</strong>. </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\cc1889d91d8473e6.png"></p>
+<ol type="1" start="2">
+<li>В разделе <strong>Select a Project Template</strong> выберите <strong>Empty Activity</strong> и нажмите <strong>Next</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\f30e149ded3c5653.png"></p>
+<ol type="1" start="3">
+<li>В разделе <strong>Configure Your Project</strong> укажите название проекта, путь к проекту, язык и минимальную версию ОС для запуска вашего проекта (рекомендуется установить версию <strong>API 23</strong>). Чекбокс <strong>Use legacy android support libraries</strong> выделять не следует. После указания параметров проекта, нажмите <strong>Finish</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\52295604a698d03d.png"></p>
+<ol type="1" start="4">
+<li>Дождитесь завершения генерации проекта.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Создание и настройка эмулятора" duration="0">
+        <ol type="1" start="1">
+<li>Запустите <strong>AVD Manager</strong> (с помощью кнопки на тулбаре или в меню <strong>Tools</strong> -&gt; <strong>AVD Manager</strong>) и создайте новое виртуальное устройство.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\67da19033129fc3a.png"></p>
+<ol type="1" start="2">
+<li>Выберите подходящие физические параметры устройства, после чего нажмите <strong>Next</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e69d0b6338888582.png"></p>
+<ol type="1" start="3">
+<li>В разделе <strong>System Image</strong> выберите актуальную версию операционной системы. Убедитесь, что вы устанавливаете версию x86, после чего нажмите <strong>Next</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e5c4ff3539934bdf.png"></p>
+<ol type="1" start="4">
+<li>Далее вы можете изменить параметры устройства (настройки по-умолчанию вполне подходят), а также рекомендуется убрать скин для виртуального устройства). После всех настроек нажимайте <strong>Finish</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\23a1fa0e3ce3e84d.png"></p>
+<ol type="1" start="5">
+<li>Закройте окно <strong>AVD Manager</strong> и запустите ваш проект.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\c5faf78f2bda58fc.png"></p>
+<ol type="1" start="6">
+<li>Дождитесь загрузки эмулятора и запуска вашего приложения.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\4354b7e7f87d9a0.png"></p>
+<ol type="1" start="7">
+<li>Убедитесь, что эмулятор работает с приемлемой скоростью, отсутствуют существенные подтормаживания и задержки. Если ваш эмулятор работает медленно, убедитесь, что вы корректно настроили ваш компьютер для эмуляции android-устройства.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Создание макета окна" duration="0">
+        <p>Для начала нам необходимо создать макет нашего простейшего приложения.</p>
+<ol type="1" start="1">
+<li>Откройте макет res\layout\activity_main.xml</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\a076737dd27175c3.png"></p>
+<ol type="1" start="2">
+<li>Выделите и удалите виджет <strong>TextView</strong>, который был добавлен при генерации проекта, после чего найдите в палитре виджетов (Palette) <strong>Text</strong> -&gt; <strong>Plain Text</strong> (это виджет поля ввода, класс <strong>EditText</strong>), добавьте его на экран, после чего привяжите виджет ко всем четырем сторонам экрана.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\df0e1e86e188f171.gif"></p>
+<ol type="1" start="3">
+<li>Добавьте виджет TextView (Text -&gt; TextView). Эта текстовая надпись должна находиться сверху от поля ввода с выравниванием по левой стороне. Расстояние между верхней границей поля ввода и нижней границей текстовой надписи должно составлять 8dp.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\2cc171a33776d35b.png"></p>
+<aside class="special"><p>Обратите внимание, что мы задумали такой макет, что левая граница текстовой надписи должна быть привязана к левой границе поля ввода. Для этого левую границу текстовой надписи мы буквально привязываем ограничением к левой границе поля ввода. Теперь, если поле ввода сместится по горизонтали, то поле ввода также сместится, чтобы соблюдалась привязка.</p>
+<p>Далее, чтобы текстовая надпись располагалась вверху от поля ввода, нижнюю границу текстовой надписи мы привязываем к верхней границе поля ввода. Если поле ввода сместится по вертикали, то текстовая надпись также сместится таким образом, чтобы соблюдать ограничение.</p>
+<p>Если мы хотим сделать отступ между нижней границей надписи и верхней границей поля ввода, мы просто указываем отступ в панели атрибутов, как показано на скриншоте выше.</p>
+</aside>
+<ol type="1" start="4">
+<li>Теперь добавим еще одну текстовую надпись. Она должна располагаться снизу от поля ввода на расстоянии 16dp и должна быть отцентрирована по отношению к полю вводу. Также сделаем эту надпись больше, для этого необходимо изменить параметр <strong>textAppearance</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\16aa7db9eaa5154c.png"></p>
+<ol type="1" start="5">
+<li>Добавим на экран кнопку (Buttons -&gt; Button), расположим ее ниже последней текстовой надписи и по центру экрана. Расстояние от последней текстовой надписи до кнопки должно быть 16dp.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\5dd55fa3a986d2d4.png"></p>
+<ol type="1" start="6">
+<li>Далее нам необходимо изменить идентификатор для наших четырех виджетов, чтобы к ним было удобно обращаться. Для верхней текстовой надписи укажем <strong>id</strong> под названием label. Выделите верхнюю текстовую надпись на экране редактирования макета или в дереве компонентов, после чего измените атрибут <strong>id</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\b4ee539aacb1e603.png"></p>
+<ol type="1" start="7">
+<li>Для поля ввода укажем идентификатор <strong>name_et</strong>, а для нижней текстовой надписи укажем идентификатор <strong>greeting_text</strong>. Для кнопки укажем идентификатор greet_button.</li>
+</ol>
+<p>Ниже представлен код макета, который мы создали выше.</p>
+<h3 is-upgraded><strong>res/layout/activity_main.xml</strong></h3>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
+    xmlns:tools=&#34;http://schemas.android.com/tools&#34;
+    android:layout_width=&#34;match_parent&#34;
+    android:layout_height=&#34;match_parent&#34;
+    tools:context=&#34;.MainActivity&#34;&gt;
+
+    &lt;EditText
+        android:id=&#34;@+id/name_et&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:ems=&#34;10&#34;
+        android:inputType=&#34;textPersonName&#34;
+        android:text=&#34;Name&#34;
+        app:layout_constraintBottom_toBottomOf=&#34;parent&#34;
+        app:layout_constraintEnd_toEndOf=&#34;parent&#34;
+        app:layout_constraintStart_toStartOf=&#34;parent&#34;
+        app:layout_constraintTop_toTopOf=&#34;parent&#34; /&gt;
+
+    &lt;TextView
+        android:id=&#34;@+id/label&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_marginBottom=&#34;8dp&#34;
+        android:text=&#34;TextView&#34;
+        app:layout_constraintBottom_toTopOf=&#34;@+id/name_et&#34;
+        app:layout_constraintStart_toStartOf=&#34;@+id/name_et&#34; /&gt;
+
+    &lt;TextView
+        android:id=&#34;@+id/greeting_text&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_marginTop=&#34;16dp&#34;
+        android:text=&#34;TextView&#34;
+        android:textAppearance=&#34;@style/TextAppearance.AppCompat.Display1&#34;
+        app:layout_constraintEnd_toEndOf=&#34;@+id/name_et&#34;
+        app:layout_constraintStart_toStartOf=&#34;@+id/name_et&#34;
+        app:layout_constraintTop_toBottomOf=&#34;@+id/name_et&#34; /&gt;
+
+    &lt;Button
+        android:id=&#34;@+id/greet_button&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_marginTop=&#34;16dp&#34;
+        android:text=&#34;Button&#34;
+        app:layout_constraintEnd_toEndOf=&#34;parent&#34;
+        app:layout_constraintStart_toStartOf=&#34;parent&#34;
+        app:layout_constraintTop_toBottomOf=&#34;@+id/greeting_text&#34; /&gt;
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Создание текстовых ресурсов" duration="0">
+        <p>Дальнейший шаг - создание текстовых ресурсов. </p>
+<p class="image-container"><img style="width: 624.00px" src="img\cf4a83322b9f1ff3.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\7f5bfacad15a41e3.png"></p>
+<p class="image-container"><img style="width: 584.00px" src="img\de67ac7c7774fa9.png"></p>
+<h3 is-upgraded><strong>res/values/strings.xml</strong></h3>
+<pre><code>&lt;resources&gt;
+    &lt;string name=&#34;app_name&#34;&gt;Ivanov_ai171_lab1&lt;/string&gt;
+    &lt;string name=&#34;label_text&#34;&gt;Enter your name&lt;/string&gt;
+    &lt;string name=&#34;name_et_hint&#34;&gt;name&lt;/string&gt;
+    &lt;string name=&#34;greeting_message&#34;&gt;Hello, %s!&lt;/string&gt;
+    &lt;string name=&#34;greet_button_text&#34;&gt;Greet&lt;/string&gt;
+    &lt;string name=&#34;default_greet_message&#34;&gt;Hello, stranger!&lt;/string&gt;
+&lt;/resources&gt;</code></pre>
+<h3 is-upgraded><strong>res/values-ru/strings.xml</strong></h3>
+<pre><code>&lt;resources&gt;
+    &lt;string name=&#34;app_name&#34;&gt;Ivanov_ai171_lab1&lt;/string&gt;
+    &lt;string name=&#34;label_text&#34;&gt;Введите свое имя&lt;/string&gt;
+    &lt;string name=&#34;name_et_hint&#34;&gt;Имя&lt;/string&gt;
+    &lt;string name=&#34;greeting_message&#34;&gt;Привет, %s!&lt;/string&gt;
+    &lt;string name=&#34;greet_button_text&#34;&gt;Приветствовать&lt;/string&gt;
+    &lt;string name=&#34;default_greet_message&#34;&gt;Привет, незнакомец!&lt;/string&gt;
+&lt;/resources&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Программирование бизнес-логики окна" duration="0">
+        <h3 is-upgraded><strong>MainActivity.java</strong></h3>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EditText name_et = findViewById(R.id.name_et);
+        TextView greeting_text = findViewById(R.id.greeting_text);
+
+        Button button = findViewById(R.id.greet_button);
+        button.setOnClickListener(v -&gt; {
+            String name = name_et.getText().toString();
+            String message = getString(R.string.greeting_message, name);
+            greeting_text.setText(message);
+        });
+    }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Запуск и проверка работы разработанного приложения" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

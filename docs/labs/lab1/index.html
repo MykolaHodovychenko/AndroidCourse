@@ -22,13 +22,13 @@
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
-                  id=""
+                  id="1"
                   title="Лабораторная работа 1"
                   environment="web"
                   feedback-link="">
     
       <google-codelab-step label="Вступление" duration="0">
-        <h2 is-upgraded><strong>Тема работы: Знакомство с Android Studio, создание простейшего приложения</strong></h2>
+        <h2 is-upgraded><strong>Тема работы: Знакомство с Android Studio, создание простейшего приложения.</strong></h2>
 <h2 is-upgraded><strong>Цель работы:</strong></h2>
 <ul>
 <li>ознакомиться с инструментами разработки Android-приложений; </li>
@@ -45,20 +45,15 @@
 </table>
 </aside>
 <h2 is-upgraded><strong>Задание.</strong></h2>
-<p>Необходимо разработать простое приложение. Пользователь вводит свое имя, нажимает на кнопку и появляется приветственная надпись. При смене языка с английского на русский, приложение должно изменить язык надписей на русский.</p>
-<table>
-<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\fc426d389a0467c9.png"></p>
-</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\cf7c72f60c0fd561.png"></p>
-</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\2b61413874af8d36.png"></p>
-</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 142.00px" src="img\8d5f22087d4888d0.png"></p>
-</td></tr>
-</table>
+<p>Необходимо разработать простое приложение. Пользователь вводит свое имя, нажимает на кнопку и появляется приветственная надпись. При смене языка с английского на украинский или русский, приложение должно изменить язык надписей.</p>
+<p class="image-container"><img style="width: 356.00px" src="img\2dc9caa63b90000b.gif"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Установка программного обеспечения" duration="0">
-        <ol type="1" start="1">
+        <p>Для начала необходимо установить необходимое программное обеспечения. Вам нужен инструментарий разработчика Java, всё остальное можно установить в процессе установки Android Studio.</p>
+<ol type="1" start="1">
 <li>Установите Java Development Kit - <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">https://www.oracle.com/java/technologies/javase-downloads.html</a></li>
 <li>Установите Android Studio по следующей ссылке - <a href="https://developer.android.com/studio" target="_blank">https://developer.android.com/studio</a></li>
 </ol>
@@ -125,7 +120,7 @@
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\e5c4ff3539934bdf.png"></p>
 <ol type="1" start="4">
-<li>Далее вы можете изменить параметры устройства (настройки по-умолчанию вполне подходят), а также рекомендуется убрать скин для виртуального устройства). После всех настроек нажимайте <strong>Finish</strong>.</li>
+<li>Далее вы можете изменить параметры устройства (настройки по-умолчанию вполне подходят), а также рекомендуется убрать скин для виртуального устройства). После всех настроек нажмите <strong>Finish</strong>.</li>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\23a1fa0e3ce3e84d.png"></p>
 <ol type="1" start="5">
@@ -146,7 +141,7 @@
       <google-codelab-step label="Создание макета окна" duration="0">
         <p>Для начала нам необходимо создать макет нашего простейшего приложения.</p>
 <ol type="1" start="1">
-<li>Откройте макет res\layout\activity_main.xml</li>
+<li>Откройте макет <strong>res\layout\activity_main.xml</strong></li>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\a076737dd27175c3.png"></p>
 <ol type="1" start="2">
@@ -154,7 +149,7 @@
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\df0e1e86e188f171.gif"></p>
 <ol type="1" start="3">
-<li>Добавьте виджет TextView (Text -&gt; TextView). Эта текстовая надпись должна находиться сверху от поля ввода с выравниванием по левой стороне. Расстояние между верхней границей поля ввода и нижней границей текстовой надписи должно составлять 8dp.</li>
+<li>Добавьте виджет <strong>TextView</strong> (<strong>Text</strong> -&gt; <strong>TextView</strong>). Эта текстовая надпись должна находиться сверху от поля ввода с выравниванием по левой стороне. Расстояние между верхней границей поля ввода и нижней границей текстовой надписи должно составлять 8dp.</li>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\2cc171a33776d35b.png"></p>
 <aside class="special"><p>Обратите внимание, что мы задумали такой макет, что левая граница текстовой надписи должна быть привязана к левой границе поля ввода. Для этого левую границу текстовой надписи мы буквально привязываем ограничением к левой границе поля ввода. Теперь, если поле ввода сместится по горизонтали, то поле ввода также сместится, чтобы соблюдалась привязка.</p>
@@ -166,15 +161,15 @@
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\16aa7db9eaa5154c.png"></p>
 <ol type="1" start="5">
-<li>Добавим на экран кнопку (Buttons -&gt; Button), расположим ее ниже последней текстовой надписи и по центру экрана. Расстояние от последней текстовой надписи до кнопки должно быть 16dp.</li>
+<li>Добавим на экран кнопку (<strong>Buttons</strong> -&gt; <strong>Button</strong>), расположим ее ниже последней текстовой надписи и по центру экрана. Расстояние от последней текстовой надписи до кнопки должно быть 16dp.</li>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\5dd55fa3a986d2d4.png"></p>
 <ol type="1" start="6">
-<li>Далее нам необходимо изменить идентификатор для наших четырех виджетов, чтобы к ним было удобно обращаться. Для верхней текстовой надписи укажем <strong>id</strong> под названием label. Выделите верхнюю текстовую надпись на экране редактирования макета или в дереве компонентов, после чего измените атрибут <strong>id</strong>.</li>
+<li>Далее нам необходимо изменить идентификатор для наших четырех виджетов, чтобы к ним было удобно обращаться. Для верхней текстовой надписи укажем <strong>id</strong> под названием <strong>label</strong>. Выделите верхнюю текстовую надпись на экране редактирования макета или в дереве компонентов, после чего измените атрибут <strong>id</strong>.</li>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img\b4ee539aacb1e603.png"></p>
 <ol type="1" start="7">
-<li>Для поля ввода укажем идентификатор <strong>name_et</strong>, а для нижней текстовой надписи укажем идентификатор <strong>greeting_text</strong>. Для кнопки укажем идентификатор greet_button.</li>
+<li>Для поля ввода укажем идентификатор <strong>name_et</strong>, а для нижней текстовой надписи укажем идентификатор <strong>greeting_text</strong>. Для кнопки укажем идентификатор <strong>greet_button</strong>.</li>
 </ol>
 <p>Ниже представлен код макета, который мы создали выше.</p>
 <h3 is-upgraded><strong>res/layout/activity_main.xml</strong></h3>
@@ -234,10 +229,29 @@ xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
       </google-codelab-step>
     
       <google-codelab-step label="Создание текстовых ресурсов" duration="0">
-        <p>Дальнейший шаг - создание текстовых ресурсов. </p>
-<p class="image-container"><img style="width: 624.00px" src="img\cf4a83322b9f1ff3.png"></p>
-<p class="image-container"><img style="width: 624.00px" src="img\7f5bfacad15a41e3.png"></p>
-<p class="image-container"><img style="width: 584.00px" src="img\de67ac7c7774fa9.png"></p>
+        <p>Если внимательно взглянуть на получившийся макет окна, то мы увидим, что текстовые надписи в нашем макете явно прописаны в макете (hardcoded). Это плохая практика, которую следует избегать.</p>
+<aside class="special"><p>Старайтесь не добавлять в исходный код динамическое содержимое, которое может меняться в разных ситуациях. Следует избегать добавления текстовых надписей, значений цветов, размеров и так далее.</p>
+<p>Все эти значения в Android рассматриваются как ресурсы (строковые ресурсы, ресурсы цвета, ресурсы размеров и так далее) и их следует хранить в соответствующих папках и файлах внутри папки <strong>res</strong>, после чего ссылаться на них из кода или из других ресурсов, например, макетов.</p>
+</aside>
+<p>Добавим в наше приложение поддержу для украиноязычных или русскоязычных пользователей.</p>
+<ol type="1" start="1">
+<li>Откройте файл <strong>res\values\strings.xml</strong>, в котором, по-умолчанию, находятся строковые ресурсы.</li>
+</ol>
+<h3 is-upgraded><strong>res/values/strings.xml</strong></h3>
+<pre><code>&lt;resources&gt;
+    &lt;string name=&#34;app_name&#34;&gt;Ivanov_ai171_lab1&lt;/string&gt;
+&lt;/resources&gt;</code></pre>
+<p>Изначально там находится только название приложения. Обратите внимание на синтаксис строкового ресурса. Само значение находится между тэгами <strong>&lt;string&gt;&lt;/string&gt;</strong>, а идентификатор ресурса указывается в атрибуте <strong>name</strong>.</p>
+<p>Давайте подумаем, какие текстовые надписи есть в нашем приложении:</p>
+<ul>
+<li>значение текстового поля label;</li>
+<li>значение подсказки в поле ввода;</li>
+<li>значение приветственного сообщения;</li>
+<li>надпись на кнопке.</li>
+</ul>
+<ol type="1" start="2">
+<li>Добавим строковые ресурсы в файл <strong>strings.xml</strong></li>
+</ol>
 <h3 is-upgraded><strong>res/values/strings.xml</strong></h3>
 <pre><code>&lt;resources&gt;
     &lt;string name=&#34;app_name&#34;&gt;Ivanov_ai171_lab1&lt;/string&gt;
@@ -247,6 +261,59 @@ xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
     &lt;string name=&#34;greet_button_text&#34;&gt;Greet&lt;/string&gt;
     &lt;string name=&#34;default_greet_message&#34;&gt;Hello, stranger!&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
+<p>Обратите внимание, что для приветственного сообщения было добавлен еще один ресурс для изначальной надписи, когда пользователь еще не ввел свое имя.</p>
+<p>Давайте внимательно рассмотрим следующий ресурс</p>
+<h3 is-upgraded><strong>res/values/strings.xml</strong></h3>
+<pre><code>&lt;string name=&#34;greeting_message&#34;&gt;Hello, %s!&lt;/string&gt;</code></pre>
+<p>Обратите внимание, что Android поддерживает форматирование текста в строковых ресурсах. Надпись <strong>%s</strong> означает, что сюда мы можем подставить текстовое значение. Идея состоит в том, что пользователь введет имя в поле ввода, мы считаем это значение и подставим вместо <strong>%s</strong>.</p>
+<ol type="1" start="3">
+<li>Вернемся в файл макета <strong>activity_main.xml</strong> и вместо жестко заданных текстовых надписей укажем ссылки на ресурсы. Делать это будем в режиме правки xml-кода.</li>
+</ol>
+<h3 is-upgraded><strong>res/layout/activity_main.xml</strong></h3>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout ...&gt;
+
+    &lt;EditText
+        ...
+        android:text=&#34;@string/name_et_hint&#34; /&gt;
+
+    &lt;TextView
+        ...
+        android:text=&#34;@string/label_text&#34; /&gt;
+
+    &lt;TextView
+        ...
+        android:text=&#34;@string/default_greet_message&#34; /&gt;
+
+    &lt;Button
+        ...
+        android:text=&#34;@string/greet_button_text&#34; /&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
+<p>Обратите внимание, как происходит ссылка на строковой ресурс в макете окна. Пишется символ <strong>@</strong> после чего указывается тип ресурса <strong>string</strong>, после слэша идет id строкового ресурса.</p>
+<p>Запустим приложение, проверим, как это все выглядит.</p>
+<p class="image-container"><img style="width: 383.50px" src="img\831c443b454d5173.png"></p>
+<p>Мы видим, что Android подхватил текстовые ресурсы и что надписи корректно отображаются.</p>
+<p>Теперь наша задача, создать так называемые альтернативные ресурсы, которые будут использоваться в том случае, когда системный язык устройства будет украинский или русский.</p>
+<ol type="1" start="4">
+<li>Нажмем правой кнопкой мыши на директорию values, после чего выберем <strong>New</strong> -&gt; <strong>Values Resource File</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e62820d64e86487a.png"></p>
+<ol type="1" start="5">
+<li>В появившемся меню в поле <strong>File name</strong> указываем strings, далее выбираем из меню <strong>Available qualifiers</strong> пункт <strong>Locale</strong> и жмем на кнопку <strong>&gt;&gt;</strong> что означает добавить квалификатор для альтернативного ресурса.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\2d590053c817bf5d.png"></p>
+<ol type="1" start="6">
+<li>Далее выбираем язык <strong>Russian </strong>и регион <strong>Any Region</strong>, после чего жмем <strong>OK</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\f51b06a1652dfcd.png"></p>
+<p>Обратите внимание, что после добавления альтернативного файла с ресурсами, в отображении Android появилось два файла <strong>strings.xml</strong>, один из которых имеет приписку <strong>(ru)</strong>.</p>
+<p class="image-container"><img style="width: 584.00px" src="img\de67ac7c7774fa9.png"></p>
+<p>Для того чтобы разобраться, как работают альтернативные ресурсы, перейдем в представление <strong>Project</strong>. Обратите внимание, что была создана директория <strong>values-ru</strong>, которая хранит ресурсы типа <strong>values </strong>для русской локали устройства.</p>
+<p class="image-container"><img style="width: 573.00px" src="img\872d6df1155eb0c0.png"></p>
+<ol type="1" start="7">
+<li>Откройте файл <strong>strings.xml</strong> в папке <strong>values-ru</strong> и добавьте строковые ресурсы для русской локали устройства.</li>
+</ol>
 <h3 is-upgraded><strong>res/values-ru/strings.xml</strong></h3>
 <pre><code>&lt;resources&gt;
     &lt;string name=&#34;app_name&#34;&gt;Ivanov_ai171_lab1&lt;/string&gt;
@@ -256,6 +323,14 @@ xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
     &lt;string name=&#34;greet_button_text&#34;&gt;Приветствовать&lt;/string&gt;
     &lt;string name=&#34;default_greet_message&#34;&gt;Привет, незнакомец!&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
+<aside class="special"><p><strong>ВАЖНО!</strong></p>
+<p>Обратите внимание, что строковые ресурсы для русского языка имеют те же самые идентификаторы, что и строковые ресурсы по-умолчанию. Это является ключевым моментом альтернативных ресурсов.</p>
+<p>Ресурс имеет один id, но у него может быть несколько &#34;вариантов&#34; под разные конфигурации устройства, которые называются &#34;квалификаторами&#34;.</p>
+<p>В нашем случае, у нас есть 5 строковых ресурсов, каждый из которых имеет альтернативный вариант для русской локали устройства.</p>
+</aside>
+<p>Теперь, когда на устройстве с русской локалью необходимо будет получить значение строкового ресурса, будет взята русскоязычная версия этого ресурса.</p>
+<p>Запустим приложение и проверим его работу.</p>
+<p class="image-container"><img style="width: 352.00px" src="img\6d9b05a459e558f3.gif"></p>
 
 
       </google-codelab-step>
@@ -285,7 +360,9 @@ xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
       </google-codelab-step>
     
       <google-codelab-step label="Запуск и проверка работы разработанного приложения" duration="0">
-        
+        <p>Теперь проверим работу программы. Обратите внимание, что при изменении первого языка устройства, программа использует альтернативные строковые ресурсы, которые мы указали для русского языка.</p>
+<p class="image-container"><img style="width: 356.00px" src="img\2dc9caa63b90000b.gif"></p>
+
 
       </google-codelab-step>
     

@@ -1,0 +1,441 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Лабораторная работа 2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="2"
+                  title="Лабораторная работа 2"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Вступление" duration="0">
+        <h2 is-upgraded><strong>Тема работы: Работа с несколькими Activity. Явные и неявные намерения.</strong></h2>
+<h2 is-upgraded><strong>Цель работы:</strong></h2>
+<ul>
+<li>разобраться с файлом манифеста и его ролью в Android-приложении;</li>
+<li>ознакомиться с созданием Activity и аспектами его работы;</li>
+<li>разработать приложение с несколькими Activity;</li>
+<li>ознакомиться с понятием стека Activity;</li>
+<li>изучить механизм намерений (Intent) для взаимодействия с компонентами приложений;</li>
+<li>ознакомиться с понятием явных и неявных намерений, изучить сценарии их использования.</li>
+</ul>
+<h2 is-upgraded><strong>Задание.</strong></h2>
+<p>Для успешной сдачи лабораторной работы вам необходимо разработать приложение со следующим функционалом: приложение должно отправить письмо на электронную почту преподавателя с темой письма, в которой указать ФИО и группу студента, с текстом письма &#34;Лабораторная работа 2&#34; и с миниатюрой изображения с селфи-камеры телефона, где четко видно лицо студента.</p>
+<p>Для групп 181-183 электронная почта преподавателя: smyk@opu.ua</p>
+<p>Для групп 184 и 185 электронная почта преподавателя: <a href="mailto:myk.hod2020@gmail.com" target="_blank">myk.hod2020@gmail.com</a></p>
+<p><strong>Для сдачи лабораторной работы вам нужно будет запустить приложение на физическом устройстве, а также убедиться, что у вас предварительно установлено и настроено приложение для отправки и получения электронной почты.</strong></p>
+<aside class="special"><p><strong>ВАЖНО!</strong></p>
+<p><strong>Для выполнения лабораторной работы необходимо скачать заранее подготовленный учебный проект. Это можно сделать по следующей ссылке - </strong><a href="http://bit.do/lab2_project" target="_blank"><strong>http://bit.do/lab2_project</strong></a></p>
+</aside>
+<p class="image-container"><img style="width: 356.00px" src="img\c56fe0ae227cf074.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Создание SecondActivity" duration="0">
+        <ol type="1" start="1">
+<li>Скачайте учебный архив с проектом и откройте его.</li>
+<li>Создайте новый класс под названием SecondActivity.java и укажите следующий код. Обратите внимание, что в методе setContentView() мы указываем макет <strong>R.layout.activity_second</strong>.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>public class SecondActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+    }
+}</code></pre>
+<ol type="1" start="3">
+<li>Откройте файл манифеста и зарегистрируйте SecondActivity.</li>
+</ol>
+<h3 is-upgraded><strong>manifests/AndroidManifest.xml</strong></h3>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    package=&#34;ua.opu.activities&#34;&gt;
+
+    ...
+
+    &lt;application ...&gt;
+        &lt;activity android:name=&#34;.MainActivity&#34; ...&gt;
+        &lt;activity android:name=&#34;.SecondActivity&#34;/&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Работа с UI в MainActivity" duration="0">
+        <p>Для работы с MainActivity нам нужен доступ к трем текстовым полям с адресатом письма, темой и текстом письма, ссылка на ImageView с изображением из камеры, а также доступ к трем кнопкам.</p>
+<p>Кроме этого, мы будем хранить данные о письме в коллекции Map&lt;String,String&gt;, путь к изображению будет храниться в поле типа Uri.</p>
+<ol type="1" start="1">
+<li>Откройте MainActivity.java и создайте приватные поля класса</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    private Uri imageUri;
+
+    private ImageView mImageView;
+
+    private TextView mEmailField;
+    private TextView mSubjectField;
+    private TextView mMessageField;
+
+    private final Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+
+    ... 
+}</code></pre>
+<ol type="1" start="2">
+<li>В методе onCreate() получим ссылки на объекты UI с помощью метода findViewById(), для кнопок создадим пустые обработчики</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    ...
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mImageView = findViewById(R.id.camera_image);
+
+        mEmailField = findViewById(R.id.textview_to);
+        mSubjectField = findViewById(R.id.textview_subject);
+        mMessageField = findViewById(R.id.textview_message);
+
+        Button mDetailsButton = findViewById(R.id.button_details);
+        mDetailsButton.setOnClickListener(v -&gt; {
+        });
+
+        Button mCameraButton = findViewById(R.id.button_camera);
+        mCameraButton.setOnClickListener(v -&gt; {
+        });
+
+        Button mSendButton = findViewById(R.id.button_send);
+        mSendButton.setOnClickListener(v -&gt; {
+
+        });
+    }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Открытие SecondActivity для результата" duration="0">
+        <p>На первом этапе реализуем следующий функционал: при нажатии на кнопку <strong>Details</strong>, открывается окно SecondActivity, в котором пользователь вводит данные для отправки письма, после чего нажимает кнопку <strong>Confirm</strong> и данные отправляются в MainActivity, где сохраняются. Значение полей устанавливается в соответствующие TextView.</p>
+<p>Для начала, запросим у операционной системы открытие SecondActivity для получения результата.</p>
+<ol type="1" start="1">
+<li>Напишем код обработчика нажатия mDetailsButton в файле MainActivity. Создаем Intent, где указываем контекст, класс SecondActivity, после чего вызываем метод startActivityForResult, где указываем Intent и Request Code. Для хранения Request code создадим статическую константу.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    ...
+
+    private static final int SECOND_ACTIVITY_REQUEST_CODE = 9999;
+    
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ... 
+
+        Button mDetailsButton = findViewById(R.id.button_details);
+        mDetailsButton.setOnClickListener(v -&gt; {
+            Intent i = new Intent(this, SecondActivity.class);
+            startActivityForResult(i, SECOND_ACTIVITY_REQUEST_CODE);
+        });
+
+    }
+}</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Реализация логики SecondActivity" duration="0">
+        <p>Логика окна SecondActivity следующая: в окне есть три поля ввода: адресат, тема письма и текст письма. Также, в окне есть две кнопки: кнопка Confirm отправляет введенные в поля ввода данные в MainActivity, кнопка Cancel закрывает SecondActivity без отправки данных (пользователь отменяет операцию ввода данных в отдельном окне).</p>
+<ol type="1" start="1">
+<li>Откройте SecondActivity.java и создайте поля для тех полей ввода и двух кнопок.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>public class SecondActivity extends AppCompatActivity {
+
+    private EditText mEmailEditText;
+    private EditText mSubjectEditText;
+    private EditText mMessageEditText;
+
+    private Button mConfirmButton;
+    private Button mCancelButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ...
+    }
+}</code></pre>
+<ol type="1" start="2">
+<li>В методе onCreate() получите ссылки на элементы UI и создайте пустые обработчики для кнопок</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>public class SecondActivity extends AppCompatActivity {
+
+    private EditText mEmailEditText;
+    private EditText mSubjectEditText;
+    private EditText mMessageEditText;
+
+    private Button mConfirmButton;
+    private Button mCancelButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+        mEmailEditText = findViewById(R.id.email_et);
+        mSubjectEditText = findViewById(R.id.subject_et);
+        mMessageEditText = findViewById(R.id.message_et);
+
+        mConfirmButton = findViewById(R.id.button_confirm);
+        mConfirmButton.setOnClickListener(v -&gt; {
+        });
+
+        mCancelButton = findViewById(R.id.button_cancel);
+        mCancelButton.setOnClickListener(v -&gt; {
+        });
+    }
+}</code></pre>
+<ol type="1" start="3">
+<li>Напишем код обработчика нажатия кнопки Confirm. Логика обработчика следующая:</li>
+</ol>
+<ul>
+<li>получаем значения тех полей ввода;</li>
+<li>формируем Intent со значениями полей;</li>
+<li>Устанавливаем результат работы окна;</li>
+<li>закрываем окно.</li>
+</ul>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>mConfirmButton = findViewById(R.id.button_confirm);
+mConfirmButton.setOnClickListener(v -&gt; {
+
+    // 1. Получаем значения полей ввода
+    String email = mEmailEditText.getText().toString();
+    String subject = mSubjectEditText.getText().toString();
+    String message = mMessageEditText.getText().toString();
+
+    // 2. Формируем Intent со значениями
+    Intent i = new Intent();
+    i.putExtra(Intent.EXTRA_EMAIL, email);
+    i.putExtra(Intent.EXTRA_SUBJECT, subject);
+    i.putExtra(Intent.EXTRA_TEXT, message);
+
+    // 3. Устанавливаем результат работы окна
+    setResult(RESULT_OK, i);
+
+    // 4. Закрываем окно
+    finish();
+});</code></pre>
+<ol type="1" start="4">
+<li>Если пользователь нажал кнопку &#34;Назад&#34; на android-устройстве, это означает, что мы возвращаемся обратно в MainActivity без получения результата. Для реализации этой логики необходимо переопределить метод onBackPressed().</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>public class SecondActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {...}
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
+    }
+}</code></pre>
+<ol type="1" start="5">
+<li>Теперь напишем обработчик для кнопки Cancel. В этом случае логика аналогична методу onBackPressed(), который мы переопределили ранее. Вызовем этот метод, чтобы не дублировать код.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/SecondActivity.java</strong></h3>
+<pre><code>mCancelButton = findViewById(R.id.button_cancel);
+mCancelButton.setOnClickListener(v -&gt; onBackPressed());</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Получение результата в MainActivity" duration="0">
+        <p>Следующий этап - нам необходимо обработать результат работы SecondActivity. Если пришел RESULT_OK, то мы считываем данные из пришедшего Intent, сохраняем данные в коллекцию и меняем содержимое текстовых надписей. Если пришел RESULT_CANCELLED, то мы выдаем сообщение, что пользователь отменил действие.</p>
+<p>Для обработки результата, который пришел из другого Activity, нам необходимо переопределить метод onActivityResult().</p>
+<ol type="1" start="1">
+<li>Переопределим метод onActivityResult(), сначала проверим requestCode, чтобы убедиться, что результат пришел именно от SecondActivity</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+    }
+}</code></pre>
+<ol type="1" start="2">
+<li>Далее проверяем resultCode. Если resultCode не равен RESULT_OK, то выдаем сообщение об отмене операции.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        if (resultCode == RESULT_OK) {
+        } else {
+            Toast.makeText(this, &#34;Action cancelled!&#34;, Toast.LENGTH_SHORT).show();
+        }
+    }
+}</code></pre>
+<ol type="1" start="3">
+<li>Если входящий Intent не равен null, то &#34;вытягиваем&#34; из него данные, записываем в коллекцию и меняем значение текстовых полей.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                map.put(Intent.EXTRA_EMAIL, data.getStringExtra(Intent.EXTRA_EMAIL));
+                map.put(Intent.EXTRA_SUBJECT, data.getStringExtra(Intent.EXTRA_SUBJECT));
+                map.put(Intent.EXTRA_TEXT, data.getStringExtra(Intent.EXTRA_TEXT));
+
+                mEmailField.setText(getString(R.string.textview_to_text, map.get(Intent.EXTRA_EMAIL)));
+                mSubjectField.setText(getString(R.string.textview_subject_text, map.get(Intent.EXTRA_SUBJECT)));
+                mMessageField.setText(getString(R.string.textview_message_text, map.get(Intent.EXTRA_TEXT)));
+            }
+        } else {
+            Toast.makeText(this, &#34;Action cancelled!&#34;, Toast.LENGTH_SHORT).show();
+        }
+    }
+}</code></pre>
+<ol type="1" start="4">
+<li>Проверяем работоспособность этого функционала</li>
+</ol>
+<p class="image-container"><img style="width: 356.00px" src="img\de253b60b157b3e8.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Запуск приложения камеры и получение результата" duration="0">
+        <p>По нажатию на кнопку Camera должно открыться приложение камеры, пользователь должен делать селфи, после чего мы должны в MainActivity получить миниатюру снимка, сохранить его в устройстве, после чего изменить рисунок для ImageView.</p>
+<ol type="1" start="1">
+<li>Напишем обработчик нажатия для кнопки mCameraButton. Создаем неявный Intent, где указываем action в формате строки. Далее пытаемся открыть activity для получения результата, где указываем Intent и Request Code. Для хранения Request code создадим статическую константу. Если на устройстве нет ни одного activity, которое может реализовать указанный action, то выдаем сообщение.</li>
+</ol>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>private static final int REQUEST_IMAGE_CAPTURE = 1000;
+
+...
+
+Button mCameraButton = findViewById(R.id.button_camera);
+mCameraButton.setOnClickListener(v -&gt; {
+    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    try {
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    } catch (ActivityNotFoundException e) {
+        Toast.makeText(this, &#34;Error while trying to open camera app&#34;, Toast.LENGTH_SHORT).show();
+    }
+});</code></pre>
+<ol type="1" start="2">
+<li>Для обработки результата, который пришел из activity приложения камеры, вернемся в метод onActivityResult() и добавим проверку на другой request Code.</li>
+</ol>
+<p>Для обработки результата, который пришел из другого Activity, нам необходимо переопределить метод onActivityResult().</p>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        ...  
+    } else if (requestCode == REQUEST_IMAGE_CAPTURE &amp;&amp; resultCode == RESULT_OK) {
+
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get(&#34;data&#34;);
+        mImageView.setImageBitmap(imageBitmap);
+
+        File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), &#34;screenshot.png&#34;);
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(outputFile);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+
+            imageUri = Uri.fromFile(outputFile);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<ol type="1" start="3">
+<li>Проверяем работу этой части функционала приложения</li>
+</ol>
+<p class="image-container"><img style="width: 356.00px" src="img\970e4a7eb94681f2.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Запуск приложения для отправки электронной почты с передачей данных для письма" duration="0">
+        <p>Финальный этап - реализация логики при нажатии на кнопку Send. При нажатии на кнопку, мы должны сформировать неявный Intent, куда добавим требуемые параметры, после чего вызовем метод startActivity.</p>
+<h3 is-upgraded><strong>java/opu.ua.activities/MainActivity.java</strong></h3>
+<pre><code>Button mSendButton = findViewById(R.id.button_send);
+mSendButton.setOnClickListener(v -&gt; {
+    try {
+        Intent mail = new Intent(Intent.ACTION_SEND);
+        mail.setType(&#34;message/rfc822&#34;);
+        mail.putExtra(Intent.EXTRA_EMAIL, new String[]{map.get(Intent.EXTRA_EMAIL)});
+        mail.putExtra(Intent.EXTRA_SUBJECT, map.get(Intent.EXTRA_SUBJECT));
+        mail.putExtra(Intent.EXTRA_TEXT, map.get(Intent.EXTRA_TEXT));
+        mail.putExtra(Intent.EXTRA_STREAM, imageUri);
+
+        startActivity(Intent.createChooser(mail, &#34;Choose email client&#34;));
+    } catch (android.content.ActivityNotFoundException ex) {
+        Toast.makeText(this, &#34;There are no email clients installed&#34;, Toast.LENGTH_SHORT).show();
+    }
+});</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Запуск и проверка разработанного приложения" duration="0">
+        <p>Запускаем приложение и проверяем работоспособность</p>
+<p class="image-container"><img style="width: 356.00px" src="img\c56fe0ae227cf074.gif"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
